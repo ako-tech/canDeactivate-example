@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  padding: var(--base-separation) var(--double-separation);
+}
+h1 {
+  font-size: 4em;
+  margin-bottom: var(--base-separation);
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+li {
+  margin-bottom: var(--base-separation);
+  background-color: #fff;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: #c9e8e5;
+  }
+
+  a {
+    padding: var(--base-separation) var(--base-separation);
+    text-decoration: none;
+    color: inherit;
+    display: grid;
+    column-gap: var(--double-separation);
+    grid-template:
+      "img name"
+      "img email"
+      / min-content auto;
+    align-items: center;
+
+    .img__placeholder {
+      grid-area: img;
+      background-color: #97bab7;
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .username {
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+
+    .useremail {
+      font-size: 0.9em;
+      color: #555555;
+    }
+  }
+}

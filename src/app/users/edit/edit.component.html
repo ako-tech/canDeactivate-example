@@ -1,0 +1,28 @@
+<a class="back-btn" routerLink="../">
+  <img src="assets/arrow_back.svg" alt="Volver" />
+</a>
+
+<div class="user-info-container">
+  <div class="img-placeholder">
+    {{ editForm.controls.name.value | slice : 0 : 1 }}
+  </div>
+
+  <form [formGroup]="editForm">
+    <label>
+      Nombre
+      <input type="text" formControlName="name" />
+    </label>
+    <label>
+      email
+      <input type="email" formControlName="email" />
+    </label>
+
+    <button
+      (click)="onSave()"
+      type="submit"
+      [disabled]="editForm.pristine || editForm.invalid"
+    >
+      Guardar
+    </button>
+  </form>
+</div>

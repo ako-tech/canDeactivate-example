@@ -1,0 +1,11 @@
+<h1>Usuarios</h1>
+
+<ul *ngIf="users$ | async as users">
+  <li *ngFor="let user of users">
+    <a [routerLink]="[user.id]">
+      <span class="img__placeholder">{{ user.name | slice : 0 : 1 }}</span>
+      <p class="username">{{ user.name }}</p>
+      <p class="useremail">{{ user.email }}</p>
+    </a>
+  </li>
+</ul>
