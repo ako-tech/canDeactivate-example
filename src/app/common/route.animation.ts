@@ -24,25 +24,33 @@ const editIn = query(':enter', [
   style({ zIndex: 100, transform: 'translateX(100%)' }),
   animate(`${defaultDuration} ease-out`, style({ transform: 'translateX(0)' })),
 ]);
-const editOut = query(':leave', [
-  style({ zIndex: 100, transform: 'translateX(0)' }),
-  animate(
-    `${defaultDuration} ease-in`,
-    style({ transform: 'translateX(100%)' })
-  ),
-]);
+const editOut = query(
+  ':leave',
+  [
+    style({ zIndex: 100, transform: 'translateX(0)' }),
+    animate(
+      `${defaultDuration} ease-in`,
+      style({ transform: 'translateX(100%)' })
+    ),
+  ],
+  { optional: true }
+);
 
 const listIn = query(':enter', [
   style({ transform: 'translateX(-20px)' }),
   animate(`${defaultDuration} ease-out`, style({ transform: 'translateX(0)' })),
 ]);
-const listOut = query(':leave', [
-  style({ transform: 'translateX(0)' }),
-  animate(
-    `${defaultDuration} ease-in`,
-    style({ transform: 'translateX(-20px)' })
-  ),
-]);
+const listOut = query(
+  ':leave',
+  [
+    style({ transform: 'translateX(0)' }),
+    animate(
+      `${defaultDuration} ease-in`,
+      style({ transform: 'translateX(-20px)' })
+    ),
+  ],
+  { optional: true }
+);
 
 export const routeAnimation = trigger('routeAnimation', [
   transition('* => edit', [defaultState, group([editIn, listOut])]),
