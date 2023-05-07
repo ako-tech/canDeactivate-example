@@ -1,5 +1,5 @@
 import { SlicePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,6 +10,7 @@ import {
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { User } from '../users.data';
 import { UsersService } from '../users.service';
+import { HasUnsavedChanges } from 'src/app/common/without-unsaved-changes.guard';
 
 type EditUserForm = FormGroup<{
   name: FormControl<string>;
@@ -23,9 +24,14 @@ type EditUserForm = FormGroup<{
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
 })
-export class UserEditComponent {
+export class UserEditComponent implements HasUnsavedChanges {
   originalUser: User;
   editForm!: EditUserForm;
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnloadHandler(e: BeforeUnloadEvent) {
+    return this.hasUnsavedChanges() === false;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +47,10 @@ export class UserEditComponent {
 
     this.originalUser = user;
     this.initForm(user);
+  }
+
+  hasUnsavedChanges(): boolean {
+    return this.editForm.dirty;
   }
 
   private initForm({ name, email }: User): void {
